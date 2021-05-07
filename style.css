@@ -3,6 +3,7 @@
 :root {
   --primary-color: #22254b;
   --secondary-color: #373b69;
+  --text-color: #ffff00;
 }
 
 * {
@@ -19,22 +20,35 @@ body {
 header {
   padding: 1rem;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   background-color: var(--secondary-color);
 }
 
+#logo {
+  margin-left: 7.5vw;
+  color: var(--text-color);
+  font-family: cursive;
+  font-size: 3rem;
+  font-weight: bolder;
+  flex: 2;
+}
+
 .search {
+  margin-right: 7.5vw;
   background-color: transparent;
   border: 2px solid var(--primary-color);
   border-radius: 50px;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.5rem 1rem;
   color: #fff;
+  flex: 5;
 }
 
 .search::placeholder {
-  color: #7378c5;
+  color: var(--text-color);
 }
 
 .search:focus {
@@ -43,18 +57,20 @@ header {
 }
 
 main {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
+  grid-gap: 1vw;
+  justify-items: stretch;
 }
 
 .movie {
-  width: 300px;
   margin: 1rem;
   background-color: var(--secondary-color);
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
   border-radius: 3px;
+  height: inherit;
 }
 
 .movie img {
@@ -66,7 +82,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.5rem 0.5rem;
   letter-spacing: 0.5px;
 }
 
@@ -111,4 +127,27 @@ main {
 
 .movie:hover .overview {
   transform: translateY(0);
+}
+
+@media screen and (max-width: 670px) {
+  html {
+    display: none;
+  }
+  /* header {
+    display: block;
+  }
+
+  main {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    justify-items: stretch;
+    margin: 0%;
+    grid-gap: 1rem;
+  }
+
+  .m1,
+  .m2,
+  .movie {
+    grid-column: auto;
+    grid-row: auto;
+  } */
 }

@@ -1,6 +1,6 @@
 // API Keys and links
 const API_URL =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=65646db72b3ea126da5a9f54222bde62&page=1";
+  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=65646db72b3ea126da5a9f54222bde62&result";
 const IMG_PATH = "https://image.tmdb.org/t/p/w500";
 const SEARCH_API =
   'https://api.themoviedb.org/3/search/movie?api_key=65646db72b3ea126da5a9f54222bde62&query="';
@@ -9,12 +9,15 @@ const SEARCH_API =
 const form = document.getElementById("form");
 const main = document.getElementById("main");
 
+var rr = 3,
+  rl = 4;
 getMovies(API_URL);
 
 form.addEventListener("submit", (e) => {
   // Prevents form Submission
   e.preventDefault();
-
+  rr = 3;
+  rl = 4;
   const searchTerm = search.value;
   if (searchTerm && searchTerm !== "") {
     getMovies(SEARCH_API + searchTerm);
@@ -33,10 +36,22 @@ async function getMovies(url) {
 
 function showMovies(movies) {
   main.innerHTML = "";
-  movies.forEach((movie) => {
+  movies.forEach((movie, index) => {
     const { title, poster_path, vote_average, overview } = movie;
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
+
+    if (index % 5 === 0 && index > 0) {
+      console.log("rr", rr - 2, "to", rr);
+      movieEl.style.setProperty("grid-column", `4/6`);
+      movieEl.style.setProperty("grid-row", `${rr - 2} / ${rr}`);
+      rr = rr + 3;
+    } else if (index % 5 === 1 && index > 2) {
+      console.log("rl", rl - 2, "to", rl);
+      movieEl.style.setProperty("grid-column", `1/3`);
+      movieEl.style.setProperty("grid-row", `${rl - 2} / ${rl}`);
+      rl = rl + 2;
+    }
     movieEl.innerHTML = `
       <img
         src="${IMG_PATH + poster_path}"
