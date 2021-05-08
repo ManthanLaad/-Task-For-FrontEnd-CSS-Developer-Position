@@ -1,6 +1,6 @@
 # -Task-For-FrontEnd-CSS-Developer-Position
 
-Hosted at :- https://manthanlaad.github.io/-Task-For-FrontEnd-CSS-Developer-Position/
+Hosted using Netlify at :- https://loving-bell-8472a6.netlify.app
 
 In this project i have successfully implemented CSS GRID to build a movie website which shows the latest movies and even allows a user to search for movies. It displays the movies in a css grid format. The website is mobile responsive
 
