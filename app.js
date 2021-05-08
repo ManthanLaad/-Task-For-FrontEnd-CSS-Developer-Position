@@ -8,7 +8,7 @@ const SEARCH_API =
 // DOM Selections
 const form = document.getElementById("form");
 const main = document.getElementById("main");
-
+var data = [];
 var rr = 3,
   rl = 4;
 getMovies(API_URL);
@@ -27,11 +27,23 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+window.addEventListener("resize", () => {
+  rr = 3;
+  rl = 4;
+  showMovies(data);
+});
+
 // Fumctions
 async function getMovies(url) {
-  const res = await fetch(url);
-  const data = await res.json();
-  showMovies(data.results);
+  const res1 = await fetch(url + "&page=1");
+  const data1 = await res1.json();
+  console.log("DATA 1:", data1, "width");
+  const res2 = await fetch(url + "&page=2");
+  const data2 = await res2.json();
+  data = [...data1.results, ...data2.results];
+  console.log("DATA 2:", data2, "size", data.length);
+
+  showMovies(data);
 }
 
 function showMovies(movies) {
@@ -40,13 +52,12 @@ function showMovies(movies) {
     const { title, poster_path, vote_average, overview } = movie;
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
-
-    if (index % 5 === 0 && index > 0) {
+    if (index % 9 === 0 && index > 0 && window.screen.width > 1300) {
       console.log("rr", rr - 2, "to", rr);
       movieEl.style.setProperty("grid-column", `4/6`);
       movieEl.style.setProperty("grid-row", `${rr - 2} / ${rr}`);
       rr = rr + 3;
-    } else if (index % 5 === 1 && index > 2) {
+    } else if (index % 9 === 1 && index > 2 && window.screen.width > 1300) {
       console.log("rl", rl - 2, "to", rl);
       movieEl.style.setProperty("grid-column", `1/3`);
       movieEl.style.setProperty("grid-row", `${rl - 2} / ${rl}`);
