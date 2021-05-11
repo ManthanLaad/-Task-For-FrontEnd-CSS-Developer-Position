@@ -52,12 +52,12 @@ function showMovies(movies) {
     const { title, poster_path, vote_average, overview } = movie;
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
-    if (index % 9 === 0 && index > 0 && window.screen.width > 1300) {
+    if (index % 9 === 0 && index > 0 && window.innerWidth > 1300) {
       console.log("rr", rr - 2, "to", rr);
       movieEl.style.setProperty("grid-column", `4/6`);
       movieEl.style.setProperty("grid-row", `${rr - 2} / ${rr}`);
       rr = rr + 3;
-    } else if (index % 9 === 1 && index > 2 && window.screen.width > 1300) {
+    } else if (index % 9 === 1 && index > 2 && window.innerWidth > 1300) {
       console.log("rl", rl - 2, "to", rl);
       movieEl.style.setProperty("grid-column", `1/3`);
       movieEl.style.setProperty("grid-row", `${rl - 2} / ${rl}`);
